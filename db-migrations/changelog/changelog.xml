@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+
+    <!-- 
+    Master Changelog File
+    This file references all SQL changesets in the correct order.
+    Each changeset should be a separate SQL file for better maintainability.
+    -->    <!-- Initial Schema Setup -->
+    <include file="changesets/001-initial-schema.sql" relativeToChangelogFile="true"/>
+    
+    <!-- Schema Improvements - Fix data types and add audit columns -->
+    <include file="changesets/002-schema-improvements.sql" relativeToChangelogFile="true"/>
+    
+    <!-- Add Reference Data - Task statuses, priorities, and roles -->
+    <include file="changesets/003-add-reference-data.sql" relativeToChangelogFile="true"/>
+    
+    <!-- 
+    Add future changesets here following the same pattern:
+    <include file="changesets/003-your-next-changeset.sql" relativeToChangelogFile="true"/>
+    -->
+
+</databaseChangeLog>

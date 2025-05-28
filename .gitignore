@@ -1,0 +1,25 @@
+# Liquibase generated files
+db-migrations/output/*.sql
+*.log
+
+# Database connection files with sensitive data
+# Note: Remove these lines if you want to version control your properties files
+# liquibase-*.properties
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary files
+*.tmp
+*.temp

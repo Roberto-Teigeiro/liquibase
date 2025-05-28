@@ -1,0 +1,49 @@
+# Docker Compose for Oracle Database Local Development
+version: '3.8'
+
+services:
+  oracle-db:
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    container_name: oracle-xe-liquibase
+    environment:
+      # Set the Oracle root password
+      ORACLE_PWD: OraclePassword123
+      # Enable automatic database startup
+      ORACLE_CHARACTERSET: AL32UTF8
+    ports:
+      # Map Oracle default port
+      - "1521:1521"
+      # Map Oracle Enterprise Manager Express port
+      - "5500:5500"
+    volumes:
+      # Persist database data
+      - oracle_data:/opt/oracle/oradata
+      # Mount initialization scripts
+      - ./docker/init-scripts:/opt/oracle/scripts/startup
+    restart: unless-stopped
+    shm_size: 1g
+    # Resource limits for Oracle XE
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  # Optional: Add Adminer for database management
+  adminer:
+    image: adminer
+    container_name: oracle-adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - oracle-db
+    restart: unless-stopped
+
+volumes:
+  oracle_data:
+    driver: local
+
+networks:
+  default:
+    name: liquibase-network
